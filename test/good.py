@@ -112,7 +112,6 @@ class qtApp(QMainWindow):
         self.conn.commit()
         self.conn.close()
 
-
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = qtApp()
