@@ -38,45 +38,6 @@
     <property name="title">
      <string>Bus 1</string>
     </property>
-    <widget class="QPushButton" name="bus1Plus">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>30</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>탑승대기</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="bus1Minus">
-     <property name="geometry">
-      <rect>
-       <x>170</x>
-       <y>30</y>
-       <width>75</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>탑승취소</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="bus">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>30</y>
-       <width>51</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>100-1</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
@@ -103,6 +64,19 @@
       <string/>
      </property>
     </widget>
+    <widget class="QRadioButton" name="btnBus1">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>90</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>10번 버스</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
@@ -116,45 +90,6 @@
     <property name="title">
      <string>Bus 2</string>
     </property>
-    <widget class="QPushButton" name="bus2Plus">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>30</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>탑승대기</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="bus2Minus">
-     <property name="geometry">
-      <rect>
-       <x>170</x>
-       <y>30</y>
-       <width>75</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>탑승취소</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="bus2">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>30</y>
-       <width>51</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>155</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label2">
      <property name="geometry">
       <rect>
@@ -181,6 +116,19 @@
       <string/>
      </property>
     </widget>
+    <widget class="QRadioButton" name="btnBus2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>90</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>20번 버스</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
@@ -194,45 +142,6 @@
     <property name="title">
      <string>Bus 3</string>
     </property>
-    <widget class="QPushButton" name="bus3Plus">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>30</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>탑승대기</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="bus3Minus">
-     <property name="geometry">
-      <rect>
-       <x>170</x>
-       <y>30</y>
-       <width>75</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>탑승취소</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="bus3">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>30</y>
-       <width>51</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>10</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label3">
      <property name="geometry">
       <rect>
@@ -259,6 +168,45 @@
       <string/>
      </property>
     </widget>
+    <widget class="QRadioButton" name="btnBus3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>90</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>30번 버스</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="busPlus">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>300</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>탑승대기</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="busMinus">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>300</y>
+      <width>75</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>탑승취소</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

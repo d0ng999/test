@@ -18,85 +18,144 @@ class qtApp(QMainWindow):
         self.initDB()
 
         # 버튼시그널
-        self.bus1Plus.clicked.connect(self.bus1PlusClicked)
-        self.bus1Minus.clicked.connect(self.bus1MinusClicked)
-        self.bus2Plus.clicked.connect(self.bus2PlusClicked)
-        self.bus2Minus.clicked.connect(self.bus2MinusClicked)
-        self.bus3Plus.clicked.connect(self.bus3PlusClicked)
-        self.bus3Minus.clicked.connect(self.bus3MinusClicked)
-        
-    def bus1PlusClicked(self):
-        self.count1 += 1 
-        self.setting()
+        self.busPlus.clicked.connect(self.busPlusClicked)
+        self.busMinus.clicked.connect(self.busMinusClicked)
+        self.btnBus1.clicked.connect(self.btnBus1Clicked)
+        self.btnBus2.clicked.connect(self.btnBus2Clicked)
+        self.btnBus3.clicked.connect(self.btnBus3Clicked)
 
-    def bus2PlusClicked(self):
-        self.count2 += 1 
-        self.setting()
+    def btnBus1Clicked(self):
+        if self.btnBus1.isChecked():
+            if self.busPlus.isChecked():
+                self.busPlusClicked()
 
-    def bus3PlusClicked(self):
-        self.count3 += 1 
-        self.setting()
+            elif self.busMinus.isChecked():
+                self.busMinusClicked()
 
-    def bus1MinusClicked(self):
-        if self.count1 == 0:
-            pass
-        else:
-            self.count1 -= 1 
-            self.setting()
+    def btnBus2Clicked(self):
+        if self.btnBus2.isChecked():
+            if self.busPlus.isChecked():
+                self.busPlusClicked()
 
-    def bus2MinusClicked(self):
-        if self.count2 == 0:
-            pass
-        else:
-            self.count2 -= 1 
-            self.setting()
+            elif self.busMinus.isChecked():
+                self.busMinusClicked()
+
+    def btnBus3Clicked(self):
+        if self.btnBus3.isChecked():
+            if self.busPlus.isChecked():
+                self.busPlusClicked()
+
+            elif self.busMinus.isChecked():
+                self.busMinusClicked()
     
-    def bus3MinusClicked(self):
-        if self.count3 == 0:
-            pass
-        else:
-            self.count3 -= 1 
-            self.setting()   
 
+    def busPlusClicked(self):
+        
+        if self.btnBus1.isChecked():
+            self.count1 += 1 
+            self.setting1()
+        elif self.btnBus2.isChecked():
+            self.count2 += 1 
+            self.setting2()
+        elif self.btnBus3.isChecked():
+            self.count3 += 1 
+            self.setting3()
+
+
+    def busMinusClicked(self):
+        if self.btnBus1.isChecked():
+            if self.count1 == 0:
+                pass
+            else:
+                self.count1 -= 1 
+                self.setting1()
+
+        elif self.btnBus2.isChecked():
+            if self.count2 == 0:
+                pass
+            else:
+                self.count2 -= 1 
+                self.setting2()
+
+        elif self.btnBus3.isChecked():
+            if self.count3 == 0:
+                pass
+            else:
+                self.count3 -= 1 
+                self.setting3()
+            
+            
+
+ 
     def initDB(self):
-        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
+        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
         query='''
         SELECT bus_cnt
           FROM bus_table
          WHERE bus_num = %s
         '''
-        cur.execute(query,('100-1'))
+        cur.execute(query,('10'))
         data=cur.fetchone()
         self.count1 = int(data[0])
         self.bus1Cnt.setText(str(data[0]))
 
-        cur.execute(query,('155'))
+        cur.execute(query,('20'))
         data=cur.fetchone()
         self.count2 = int(data[0])
         self.bus2Cnt.setText(str(data[0]))
 
-        cur.execute(query,('10'))
+        cur.execute(query,('30'))
         data=cur.fetchone()
         self.count3 = int(data[0])
         self.bus3Cnt.setText(str(data[0]))
 
-    def setting(self):
-        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
+    def setting1(self):
+        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
         query = '''UPDATE bus_table
                       SET bus_cnt = %s
                     WHERE bus_num = %s '''
         
         self.bus1Cnt.setText(str(self.count1))
-        self.bus2Cnt.setText(str(self.count2))
-        self.bus3Cnt.setText(str(self.count3))
-        cur.execute(query, (self.count1, '100-1'))
-        cur.execute(query, (self.count2, '155'))
-        cur.execute(query, (self.count3, '10'))
+
+        cur.execute(query, (self.count1, '10'))
+
 
         self.conn.commit()
         self.conn.close()
+
+    def setting2(self):
+        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
+        cur = self.conn.cursor()
+        query = '''UPDATE bus_table
+                      SET bus_cnt = %s
+                    WHERE bus_num = %s '''
+        
+
+        self.bus2Cnt.setText(str(self.count2))
+
+
+        cur.execute(query, (self.count2, '20'))
+
+
+        self.conn.commit()
+        self.conn.close()
+    
+    def setting3(self):
+        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
+        cur = self.conn.cursor()
+        query = '''UPDATE bus_table
+                      SET bus_cnt = %s
+                    WHERE bus_num = %s '''
+
+        self.bus3Cnt.setText(str(self.count3))
+
+        cur.execute(query, (self.count3, '30'))
+
+        self.conn.commit()
+        self.conn.close()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
