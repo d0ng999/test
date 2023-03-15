@@ -2,19 +2,20 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 import pymysql
 
 
 class qtApp(QMainWindow):
     conn = None
 
-    # count2 = 0
-
     def __init__(self):
         super().__init__()
-        uic.loadUi('./test/busstop.ui', self)
-        # self.setWindowIcon(QIcon('./studyPyQt/addressbook.png'))
-        # self.setWindowTitle('BuSTOP v0.1')
+        uic.loadUi('./test/busstop2.ui', self)
+        self.setWindowIcon(QIcon('./test/busstop.png'))
+        self.setWindowTitle('BusStop v0.1')
+        self.date = QDate.currentDate()
+        self.datetime = QDateTime.currentDateTime()
         self.initDB()
 
         # 버튼시그널
@@ -48,19 +49,18 @@ class qtApp(QMainWindow):
             elif self.busMinus.isChecked():
                 self.busMinusClicked()
     
-
     def busPlusClicked(self):
-        
         if self.btnBus1.isChecked():
             self.count1 += 1 
             self.setting1()
+
         elif self.btnBus2.isChecked():
             self.count2 += 1 
             self.setting2()
+
         elif self.btnBus3.isChecked():
             self.count3 += 1 
             self.setting3()
-
 
     def busMinusClicked(self):
         if self.btnBus1.isChecked():
@@ -84,9 +84,6 @@ class qtApp(QMainWindow):
                 self.count3 -= 1 
                 self.setting3()
             
-            
-
- 
     def initDB(self):
         self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
@@ -95,6 +92,7 @@ class qtApp(QMainWindow):
           FROM bus_table
          WHERE bus_num = %s
         '''
+        self.statusBar().showMessage(self.datetime.toString(Qt.DefaultLocaleLongDate))
         cur.execute(query,('10'))
         data=cur.fetchone()
         self.count1 = int(data[0])
@@ -110,6 +108,7 @@ class qtApp(QMainWindow):
         self.count3 = int(data[0])
         self.bus3Cnt.setText(str(data[0]))
 
+
     def setting1(self):
         self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
@@ -118,10 +117,7 @@ class qtApp(QMainWindow):
                     WHERE bus_num = %s '''
         
         self.bus1Cnt.setText(str(self.count1))
-
         cur.execute(query, (self.count1, '10'))
-
-
         self.conn.commit()
         self.conn.close()
 
@@ -134,11 +130,7 @@ class qtApp(QMainWindow):
         
 
         self.bus2Cnt.setText(str(self.count2))
-
-
         cur.execute(query, (self.count2, '20'))
-
-
         self.conn.commit()
         self.conn.close()
     
@@ -150,12 +142,9 @@ class qtApp(QMainWindow):
                     WHERE bus_num = %s '''
 
         self.bus3Cnt.setText(str(self.count3))
-
         cur.execute(query, (self.count3, '30'))
-
         self.conn.commit()
         self.conn.close()
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
