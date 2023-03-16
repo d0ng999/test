@@ -5,18 +5,40 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import pymysql
 
+# class QPushButton(QPushButton):
+#     def __init__(self, parent = None):
+#         super().__init__(parent)
+#         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+# class QLabel(QLabel):
+#     def __init__(self, parent = None):
+#         super().__init__(parent)
+#         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+# class QRadioButton(QRadioButton):
+#     def __init__(self, parent = None):
+#         super().__init__(parent)
+#         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+
 
 class qtApp(QMainWindow):
     conn = None
 
     def __init__(self):
         super().__init__()
-        uic.loadUi('./test/busstop2.ui', self)
+        uic.loadUi('./test/busstop5.ui', self)
         self.setWindowIcon(QIcon('./test/busstop.png'))
         self.setWindowTitle('BusStop v0.1')
         self.date = QDate.currentDate()
         self.datetime = QDateTime.currentDateTime()
         self.initDB()
+        # self.btnBus1.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # self.btnBus2.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # self.btnBus3.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # self.busPlus.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # self.busMinus.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
 
         # 버튼시그널
         self.busPlus.clicked.connect(self.busPlusClicked)
@@ -24,9 +46,19 @@ class qtApp(QMainWindow):
         self.btnBus1.clicked.connect(self.btnBus1Clicked)
         self.btnBus2.clicked.connect(self.btnBus2Clicked)
         self.btnBus3.clicked.connect(self.btnBus3Clicked)
+        self.btnBus1.released.connect(self.btnBusRelease)
+        self.btnBus2.released.connect(self.btnBusRelease)
+        self.btnBus3.released.connect(self.btnBusRelease)
+    
+    def btnBusRelease(self):
+        self.btnBus1.setEnabled(True)
+        self.btnBus2.setEnabled(True)
+        self.btnBus3.setEnabled(True)
 
     def btnBus1Clicked(self):
         if self.btnBus1.isChecked():
+            self.btnBus2.setEnabled(False)
+            self.btnBus3.setEnabled(False)
             if self.busPlus.isChecked():
                 self.busPlusClicked()
 
@@ -35,6 +67,8 @@ class qtApp(QMainWindow):
 
     def btnBus2Clicked(self):
         if self.btnBus2.isChecked():
+            self.btnBus1.setEnabled(False)
+            self.btnBus3.setEnabled(False)
             if self.busPlus.isChecked():
                 self.busPlusClicked()
 
@@ -43,12 +77,14 @@ class qtApp(QMainWindow):
 
     def btnBus3Clicked(self):
         if self.btnBus3.isChecked():
+            self.btnBus2.setEnabled(False)
+            self.btnBus1.setEnabled(False)
             if self.busPlus.isChecked():
                 self.busPlusClicked()
 
             elif self.busMinus.isChecked():
                 self.busMinusClicked()
-    
+
     def busPlusClicked(self):
         if self.btnBus1.isChecked():
             self.count1 += 1 
@@ -85,7 +121,7 @@ class qtApp(QMainWindow):
                 self.setting3()
             
     def initDB(self):
-        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
+        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
         query='''
         SELECT bus_cnt
@@ -110,7 +146,7 @@ class qtApp(QMainWindow):
 
 
     def setting1(self):
-        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
+        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
         query = '''UPDATE bus_table
                       SET bus_cnt = %s
@@ -122,7 +158,7 @@ class qtApp(QMainWindow):
         self.conn.close()
 
     def setting2(self):
-        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
+        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
         query = '''UPDATE bus_table
                       SET bus_cnt = %s
@@ -135,7 +171,7 @@ class qtApp(QMainWindow):
         self.conn.close()
     
     def setting3(self):
-        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
+        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
         query = '''UPDATE bus_table
                       SET bus_cnt = %s

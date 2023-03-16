@@ -30,7 +30,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -39,7 +39,7 @@
      <height>291</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1,2,2,2,1,1,1,1">
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1,2,2,2,1">
     <item>
      <widget class="QLabel" name="label_4">
       <property name="font">
@@ -80,9 +80,18 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="4,1,1">
       <item>
-       <widget class="QRadioButton" name="btnBus3">
+       <widget class="QPushButton" name="btnBus3">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>43</height>
+         </size>
+        </property>
         <property name="text">
          <string>155번 버스</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -105,9 +114,18 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="4,1,1">
       <item>
-       <widget class="QRadioButton" name="btnBus1">
+       <widget class="QPushButton" name="btnBus1">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>43</height>
+         </size>
+        </property>
         <property name="text">
          <string>10번 버스</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -130,9 +148,18 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="4,1,1">
       <item>
-       <widget class="QRadioButton" name="btnBus2">
+       <widget class="QPushButton" name="btnBus2">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>43</height>
+         </size>
+        </property>
         <property name="text">
-         <string>100-1 번 버스</string>
+         <string>100-1번 버스</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -151,27 +178,6 @@
        </widget>
       </item>
      </layout>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_8">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="hzLay1" stretch="0,0">
