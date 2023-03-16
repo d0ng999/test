@@ -85,7 +85,7 @@ class qtApp(QMainWindow):
                 self.setting3()
             
     def initDB(self):
-        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
+        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
         query='''
         SELECT bus_cnt
@@ -98,19 +98,19 @@ class qtApp(QMainWindow):
         self.count1 = int(data[0])
         self.bus1Cnt.setText(str(data[0]))
 
-        cur.execute(query,('20'))
+        cur.execute(query,('100-1'))
         data=cur.fetchone()
         self.count2 = int(data[0])
         self.bus2Cnt.setText(str(data[0]))
 
-        cur.execute(query,('30'))
+        cur.execute(query,('155'))
         data=cur.fetchone()
         self.count3 = int(data[0])
         self.bus3Cnt.setText(str(data[0]))
 
 
     def setting1(self):
-        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
+        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
         query = '''UPDATE bus_table
                       SET bus_cnt = %s
@@ -122,7 +122,7 @@ class qtApp(QMainWindow):
         self.conn.close()
 
     def setting2(self):
-        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
+        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
         query = '''UPDATE bus_table
                       SET bus_cnt = %s
@@ -130,19 +130,19 @@ class qtApp(QMainWindow):
         
 
         self.bus2Cnt.setText(str(self.count2))
-        cur.execute(query, (self.count2, '20'))
+        cur.execute(query, (self.count2, '100-1'))
         self.conn.commit()
         self.conn.close()
     
     def setting3(self):
-        self.conn = pymysql.connect(host='localhost', user='root', password='12345', db='bus', charset='utf8')
+        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
         cur = self.conn.cursor()
         query = '''UPDATE bus_table
                       SET bus_cnt = %s
                     WHERE bus_num = %s '''
 
         self.bus3Cnt.setText(str(self.count3))
-        cur.execute(query, (self.count3, '30'))
+        cur.execute(query, (self.count3, '155'))
         self.conn.commit()
         self.conn.close()
 
