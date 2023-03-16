@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>320</width>
-    <height>310</height>
+    <height>350</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,7 +19,7 @@
   <property name="minimumSize">
    <size>
     <width>320</width>
-    <height>310</height>
+    <height>350</height>
    </size>
   </property>
   <property name="font">
@@ -30,16 +30,16 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>9</y>
      <width>301</width>
-     <height>291</height>
+     <height>331</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1,2,2,2,1">
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1,2,2,2,0,0,0,1">
     <item>
      <widget class="QLabel" name="label_4">
       <property name="font">
@@ -180,6 +180,27 @@
      </layout>
     </item>
     <item>
+     <widget class="QLabel" name="label_6">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_7">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_8">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="hzLay1" stretch="0,0">
       <property name="spacing">
        <number>30</number>
@@ -217,6 +238,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="busMinus">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>

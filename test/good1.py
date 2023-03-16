@@ -32,12 +32,15 @@ class qtApp(QMainWindow):
         self.setWindowTitle('BusStop v0.1')
         self.date = QDate.currentDate()
         self.datetime = QDateTime.currentDateTime()
+        
         self.initDB()
         # self.btnBus1.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         # self.btnBus2.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         # self.btnBus3.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         # self.busPlus.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         # self.busMinus.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        self.btnBus1.setStyleSheet('background-color:rgb(100,100,255)')
 
 
         # 버튼시그널
