@@ -5,43 +5,21 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import pymysql
 
-# class QPushButton(QPushButton):
-#     def __init__(self, parent = None):
-#         super().__init__(parent)
-#         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-
-# class QLabel(QLabel):
-#     def __init__(self, parent = None):
-#         super().__init__(parent)
-#         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-
-# class QRadioButton(QRadioButton):
-#     def __init__(self, parent = None):
-#         super().__init__(parent)
-#         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-
-
 
 class qtApp(QMainWindow):
     conn = None
 
     def __init__(self):
         super().__init__()
-        uic.loadUi('./test/busstop5.ui', self)
-        self.setWindowIcon(QIcon('./test/busstop.png'))
+        uic.loadUi('./test/busstop_modify.ui', self)
+        # self.setWindowIcon(QIcon('./test/busstop.png'))
         self.setWindowTitle('BusStop v0.1')
         self.date = QDate.currentDate()
         self.datetime = QDateTime.currentDateTime()
-        
         self.initDB()
-        # self.btnBus1.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        # self.btnBus2.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        # self.btnBus3.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        # self.busPlus.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        # self.busMinus.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-        # self.btnBus1.setStyleSheet('background-color:rgb(100,100,255)')
-
+        self.flag1 = 0; self.flag2 = 0; self.flag3 = 0
+        self.font=QFont('나눔고딕',9)
 
         # 버튼시그널
         self.busPlus.clicked.connect(self.busPlusClicked)
@@ -49,86 +27,89 @@ class qtApp(QMainWindow):
         self.btnBus1.clicked.connect(self.btnBus1Clicked)
         self.btnBus2.clicked.connect(self.btnBus2Clicked)
         self.btnBus3.clicked.connect(self.btnBus3Clicked)
-        # self.btnBus1.released.connect(self.btnBus1Release)
-        # self.btnBus2.released.connect(self.btnBus2Release)
-        # self.btnBus3.released.connect(self.btnBus3Release)
-        self.btnBus1.setAutoExclusive(True)
-        self.btnBus2.setAutoExclusive(True)
-        self.btnBus3.setAutoExclusive(True)
-    
-    # def btnBus1Release(self):
-    #     self.btnBus1.autoExclusive(True)
-    # def btnBus2Release(self):
-    #     self.btnBus2.autoExclusive(True)
-    # def btnBus3Release(self):
-    #     self.btnBus3.autoExclusive(True)
-
-
 
     def btnBus1Clicked(self):
-        if self.btnBus1.isChecked():
-            # self.btnBus2Release()
-            # self.btnBus3Release()
-            if self.busPlus.isChecked():
-                self.busPlusClicked()
-
-            elif self.busMinus.isChecked():
-                self.busMinusClicked()
+        if self.flag1 == 0:
+            self.btnBus1.setStyleSheet('background-color:rgb(100,100,255);font: 9pt "나눔고딕";')
+            self.btnBus2.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.btnBus3.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.flag1 = 1
+            self.flag2 = 0
+            self.flag3 = 0
+        elif self.flag1 == 1:
+            self.btnBus1.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.flag1 = 0
 
     def btnBus2Clicked(self):
-        if self.btnBus2.isChecked():
-            # self.btnBus1Release()
-            # self.btnBus3Release()
-            if self.busPlus.isChecked():
-                self.busPlusClicked()
-
-            elif self.busMinus.isChecked():
-                self.busMinusClicked()
+        if self.flag2 == 0:
+            self.btnBus1.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.btnBus2.setStyleSheet('background-color:rgb(100,100,255);font: 9pt "나눔고딕";')
+            self.btnBus3.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.flag1 = 0
+            self.flag2 = 1
+            self.flag3 = 0
+        elif self.flag2 == 1:
+            self.btnBus2.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.flag1 = 0
 
     def btnBus3Clicked(self):
-        if self.btnBus3.isChecked():
-            # self.btnBus2Release()
-            # self.btnBus1Release()
-            if self.busPlus.isChecked():
-                self.busPlusClicked()
-
-            elif self.busMinus.isChecked():
-                self.busMinusClicked()
-
+        if self.flag3 == 0:
+            self.btnBus1.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.btnBus2.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.btnBus3.setStyleSheet('background-color:rgb(100,100,255);font: 9pt "나눔고딕";')
+            self.flag1 = 0
+            self.flag2 = 0
+            self.flag3 = 1
+        elif self.flag3 == 1:
+            self.btnBus3.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.flag3 = 1
+    
     def busPlusClicked(self):
-        if self.btnBus1.isChecked():
+        if self.flag1 == 1:
             self.count1 += 1 
             self.setting1()
+            self.btnBus1.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.flag1 = 0
 
-        elif self.btnBus2.isChecked():
+        elif self.flag2 == 1:
             self.count2 += 1 
             self.setting2()
+            self.btnBus2.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.flag2 = 0
 
-        elif self.btnBus3.isChecked():
+        elif self.flag3 == 1:
             self.count3 += 1 
             self.setting3()
+            self.btnBus3.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+            self.flag3 = 0
 
     def busMinusClicked(self):
-        if self.btnBus1.isChecked():
+        if self.flag1 == 1:
             if self.count1 == 0:
                 pass
             else:
                 self.count1 -= 1 
                 self.setting1()
+                self.btnBus1.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+                self.flag1 = 0
 
-        elif self.btnBus2.isChecked():
+        elif self.flag2 == 1:
             if self.count2 == 0:
                 pass
             else:
                 self.count2 -= 1 
                 self.setting2()
+                self.btnBus2.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+                self.flag2 = 0
 
-        elif self.btnBus3.isChecked():
+        elif self.flag3 == 1:
             if self.count3 == 0:
                 pass
             else:
                 self.count3 -= 1 
                 self.setting3()
+                self.btnBus3.setStyleSheet('background-color:rgb(255,255,255);font: 9pt "나눔고딕";')
+                self.flag3 = 0
             
     def initDB(self):
         self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
@@ -153,7 +134,6 @@ class qtApp(QMainWindow):
         data=cur.fetchone()
         self.count3 = int(data[0])
         self.bus3Cnt.setText(str(data[0]))
-
 
     def setting1(self):
         self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
