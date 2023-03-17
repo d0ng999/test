@@ -1,5 +1,7 @@
 import sys
 from PyQt5 import uic
+import qdarkstyle 
+
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -279,7 +281,10 @@ class qtApp(QMainWindow):
         self.btnreleased()
 
 if __name__ == '__main__':
+    
     app = QApplication(sys.argv)
+    app.setStyleSheet(qdarkstyle.load_stylesheet(qt_api='pyqt5'))
     ex = qtApp()
     ex.show()
     sys.exit(app.exec_())
+    
