@@ -85,7 +85,8 @@ class qtApp(QMainWindow):
                 self.setting3()
             
     def initDB(self):
-        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')
+        # 210.119.12.69
+        self.conn = pymysql.connect(host='210.119.12.69', user='root', password='12345', db='bus', charset='utf8')        
         cur = self.conn.cursor()
         query='''
         SELECT bus_cnt
